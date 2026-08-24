@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>autonomes_fahren_gazebo</name>
+  <version>0.0.1</version>
+  <description>Simulationsumgebung für autonomes Fahren mit ROS 2 und Gazebo im Rahmen der Projektarbeit</description>
+  <maintainer email="huseyin@example.com">huseyin</maintainer>
+  <license>Apache-2.0</license>
+
+  <exec_depend>turtlebot3_gazebo</exec_depend>
+  <exec_depend>ros_gz_sim</exec_depend>
+  <exec_depend>robot_state_publisher</exec_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>

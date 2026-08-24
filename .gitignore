@@ -1,0 +1,10 @@
+build/
+install/
+log/
+
+training/models/ppo14_archiv/
+training/models/*.zip
+!training/models/ppo_turtlebot_850000_steps.zip
+
+__pycache__/
+*.pyc

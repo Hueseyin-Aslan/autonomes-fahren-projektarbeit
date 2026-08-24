@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sdf version="1.9">
+  <world name="lawn">
+    <plugin
+      filename="gz-sim-physics-system"
+      name="gz::sim::systems::Physics">
+    </plugin>
+    <plugin
+      filename="gz-sim-user-commands-system"
+      name="gz::sim::systems::UserCommands">
+    </plugin>
+    <plugin
+      filename="gz-sim-scene-broadcaster-system"
+      name="gz::sim::systems::SceneBroadcaster">
+    </plugin>
+    <plugin
+      filename="gz-sim-sensors-system"
+      name="gz::sim::systems::Sensors">
+      <render_engine>ogre2</render_engine>
+    </plugin>
+    <plugin
+      filename="gz-sim-imu-system"
+      name="gz::sim::systems::Imu">
+    </plugin>
+    <physics type="ode">
+      <max_step_size>0.004</max_step_size>
+      <real_time_factor>1.0</real_time_factor>
+      <real_time_update_rate>250</real_time_update_rate>
+    </physics>
+    <gravity>0 0 -9.8</gravity>
+    <magnetic_field>6e-06 2.3e-05 -4.2e-05</magnetic_field>
+    <atmosphere type="adiabatic"/>
+    <scene>
+      <sky><clouds><speed>12</speed></clouds></sky>
+      <grid>true</grid>
+      <ambient>0.5 0.5 0.5 0.3</ambient>
+      <background>0.3 0.3 0.3 0.3</background>
+      <shadows>true</shadows>
+    </scene>
+    <model name="ground_plane">
+      <static>true</static>
+      <link name="link">
+        <collision name="collision">
+          <geometry><plane><normal>0 0 1</normal><size>1 1</size></plane></geometry>
+          <surface><friction><ode><mu>0.6</mu><mu2>0.6</mu2></ode></friction><bounce/>
+          <contact><collide_bitmask>65535</collide_bitmask><ode><min_depth>0.005</min_depth><kp>1e8</kp></ode></contact></surface>
+        </collision>
+        <visual name="visual">
+          <cast_shadows>false</cast_shadows>
+          <geometry><plane><normal>0 0 1</normal><size>400 400</size></plane></geometry>
+          <material><diffuse>0.6 1.0 0.25 0.5</diffuse><specular>0 0 0 0</specular><emissive>0 0 0 0</emissive></material>
+        </visual>
+        <pose>0 0 0 0 -0 0</pose>
+        <inertial><pose>0 0 0 0 -0 0</pose><mass>1</mass>
+          <inertia><ixx>1</ixx><ixy>0</ixy><ixz>0</ixz><iyy>1</iyy><iyz>0</iyz><izz>1</izz></inertia></inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <pose>0 0 0 0 -0 0</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <light name="sunUTC" type="directional">
+      <pose>0 0 500 0 -0 0</pose><cast_shadows>true</cast_shadows><intensity>1</intensity>
+      <direction>0.001 0.625 -0.78</direction><diffuse>0.904 0.904 0.904 1</diffuse><specular>0.271 0.271 0.271 1</specular>
+      <attenuation><range>2000</range><linear>0</linear><constant>1</constant><quadratic>0</quadratic></attenuation>
+      <spot><inner_angle>0</inner_angle><outer_angle>0</outer_angle><falloff>0</falloff></spot>
+    </light>
+    <light type="directional" name="sun_2">
+      <cast_shadows>true</cast_shadows><pose>200 200 200 0 0 0</pose>
+      <diffuse>0.5 0.5 0.5 0.3</diffuse><specular>0.2 0.2 0.2 0.3</specular>
+      <attenuation><range>2000</range><constant>1</constant><linear>0</linear><quadratic>0</quadratic></attenuation>
+      <direction>0.01 0.01 -0.9</direction>
+    </light>
+    <spherical_coordinates>
+      <surface_model>EARTH_WGS84</surface_model>
+      <world_frame_orientation>ENU</world_frame_orientation>
+      <latitude_deg>47.397971057728974</latitude_deg>
+      <longitude_deg> 8.546163739800146</longitude_deg>
+      <elevation>0</elevation>
+    </spherical_coordinates>
+    <model name="strasse">
+      <static>true</static>
+      <pose>0 0 0.02 0 0 0</pose>
+      <link name="link">
+        <visual name="visual"><geometry><box><size>16 4 0.05</size></box></geometry>
+          <material><ambient>0.2 0.2 0.2 1</ambient><diffuse>0.3 0.3 0.3 1</diffuse></material></visual>
+        <collision name="collision"><geometry><box><size>16 4 0.05</size></box></geometry></collision>
+      </link>
+    </model>
+    <model name="startlinie">
+      <static>true</static>
+      <pose>-7 0 0.055 0 0 0</pose>
+      <link name="link"><visual name="visual"><geometry><box><size>0.2 4 0.02</size></box></geometry>
+        <material><diffuse>0 1 0 1</diffuse></material></visual></link>
+    </model>
+    <model name="ziellinie">
+      <static>true</static>
+      <pose>7 0 0.055 0 0 0</pose>
+      <link name="link"><visual name="visual"><geometry><box><size>0.2 4 0.02</size></box></geometry>
+        <material><diffuse>1 0 0 1</diffuse></material></visual></link>
+    </model>
+    <model name="hindernis_1">
+      <static>true</static>
+      <pose>-3 1 0.4 0 0 0</pose>
+      <link name="link">
+        <visual name="visual"><geometry><box><size>0.8 0.8 0.8</size></box></geometry></visual>
+        <collision name="collision"><geometry><box><size>0.8 0.8 0.8</size></box></geometry></collision>
+      </link>
+    </model>
+    <model name="hindernis_2">
+      <static>true</static>
+      <pose>2 -1 0.4 0 0 0</pose>
+      <link name="link">
+        <visual name="visual"><geometry><box><size>0.8 0.8 0.8</size></box></geometry></visual>
+        <collision name="collision"><geometry><box><size>0.8 0.8 0.8</size></box></geometry></collision>
+      </link>
+    </model>
+    <model name="rand_links">
+      <static>true</static>
+      <pose>0 2 0.055 0 0 0</pose>
+      <link name="link"><visual name="visual"><geometry><box><size>16 0.1 0.02</size></box></geometry>
+        <material><diffuse>1 1 1 1</diffuse></material></visual></link>
+    </model>
+    <model name="rand_rechts">
+      <static>true</static>
+      <pose>0 -2 0.055 0 0 0</pose>
+      <link name="link"><visual name="visual"><geometry><box><size>16 0.1 0.02</size></box></geometry>
+        <material><diffuse>1 1 1 1</diffuse></material></visual></link>
+    </model>
+    <model name="mittellinie">
+      <static>true</static>
+      <pose>0 0 0.055 0 0 0</pose>
+      <link name="link"><visual name="visual"><geometry><box><size>16 0.05 0.02</size></box></geometry>
+        <material><diffuse>1 1 0 1</diffuse></material></visual></link>
+    </model>
+    <model name="mauer_links">
+      <static>true</static>
+      <pose>0 2.05 0.2 0 0 0</pose>
+      <link name="link">
+        <visual name="visual"><geometry><box><size>16 0.1 0.4</size></box></geometry>
+          <material><diffuse>0.5 0.5 0.5 1</diffuse></material></visual>
+        <collision name="collision"><geometry><box><size>16 0.1 0.4</size></box></geometry></collision>
+      </link>
+    </model>
+    <model name="mauer_rechts">
+      <static>true</static>
+      <pose>0 -2.05 0.2 0 0 0</pose>
+      <link name="link">
+        <visual name="visual"><geometry><box><size>16 0.1 0.4</size></box></geometry>
+          <material><diffuse>0.5 0.5 0.5 1</diffuse></material></visual>
+        <collision name="collision"><geometry><box><size>16 0.1 0.4</size></box></geometry></collision>
+      </link>
+    </model>
+    <model name="mauer_start">
+      <static>true</static>
+      <pose>-8 0 0.2 0 0 0</pose>
+      <link name="link">
+        <visual name="visual"><geometry><box><size>0.1 4.2 0.4</size></box></geometry>
+          <material><diffuse>0.5 0.5 0.5 1</diffuse></material></visual>
+        <collision name="collision"><geometry><box><size>0.1 4.2 0.4</size></box></geometry></collision>
+      </link>
+    </model>
+    <model name="mauer_ziel">
+      <static>true</static>
+      <pose>8 0 0.2 0 0 0</pose>
+      <link name="link">
+        <visual name="visual"><geometry><box><size>0.1 4.2 0.4</size></box></geometry>
+          <material><diffuse>0.5 0.5 0.5 1</diffuse></material></visual>
+        <collision name="collision"><geometry><box><size>0.1 4.2 0.4</size></box></geometry></collision>
+      </link>
+    </model>
+    <model name="barriere_1">
+      <static>true</static>
+      <pose>-5 0.8 0.25 0 0 0</pose>
+      <link name="link">
+        <visual name="visual"><geometry><box><size>0.3 2.4 0.5</size></box></geometry><material><diffuse>0.7 0.1 0.1 1</diffuse></material></visual>
+        <collision name="collision"><geometry><box><size>0.3 2.4 0.5</size></box></geometry></collision>
+      </link>
+    </model>
+    <model name="barriere_2">
+      <static>true</static>
+      <pose>0 -0.8 0.25 0 0 0</pose>
+      <link name="link">
+        <visual name="visual"><geometry><box><size>0.3 2.4 0.5</size></box></geometry><material><diffuse>0.7 0.1 0.1 1</diffuse></material></visual>
+        <collision name="collision"><geometry><box><size>0.3 2.4 0.5</size></box></geometry></collision>
+      </link>
+    </model>
+    <model name="barriere_3">
+      <static>true</static>
+      <pose>5 0.8 0.25 0 0 0</pose>
+      <link name="link">
+        <visual name="visual"><geometry><box><size>0.3 2.4 0.5</size></box></geometry><material><diffuse>0.7 0.1 0.1 1</diffuse></material></visual>
+        <collision name="collision"><geometry><box><size>0.3 2.4 0.5</size></box></geometry></collision>
+      </link>
+    </model>
+    <model name="wuerfel_1">
+      <static>true</static>
+      <pose>-6 0.71 0.25 0 0 0</pose>
+      <link name="link">
+        <visual name="visual"><geometry><box><size>0.4 0.4 0.4</size></box></geometry><material><diffuse>0.1 0.1 0.6 1</diffuse></material></visual>
+        <collision name="collision"><geometry><box><size>0.4 0.4 0.4</size></box></geometry></collision>
+      </link>
+    </model>
+    <model name="wuerfel_3">
+      <static>true</static>
+      <pose>-2 1.18 0.25 0 0 0</pose>
+      <link name="link">
+        <visual name="visual"><geometry><box><size>0.4 0.4 0.4</size></box></geometry><material><diffuse>0.1 0.1 0.6 1</diffuse></material></visual>
+        <collision name="collision"><geometry><box><size>0.4 0.4 0.4</size></box></geometry></collision>
+      </link>
+    </model>
+    <model name="wuerfel_4">
+      <static>true</static>
+      <pose>3 -1.24 0.25 0 0 0</pose>
+      <link name="link">
+        <visual name="visual"><geometry><box><size>0.4 0.4 0.4</size></box></geometry><material><diffuse>0.1 0.1 0.6 1</diffuse></material></visual>
+        <collision name="collision"><geometry><box><size>0.4 0.4 0.4</size></box></geometry></collision>
+      </link>
+    </model>
+    <model name="wuerfel_6">
+      <static>true</static>
+      <pose>6.5 -1.41 0.25 0 0 0</pose>
+      <link name="link">
+        <visual name="visual"><geometry><box><size>0.4 0.4 0.4</size></box></geometry><material><diffuse>0.1 0.1 0.6 1</diffuse></material></visual>
+        <collision name="collision"><geometry><box><size>0.4 0.4 0.4</size></box></geometry></collision>
+      </link>
+    </model>
+  </world>
+</sdf>
